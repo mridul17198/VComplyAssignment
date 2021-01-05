@@ -77,6 +77,10 @@ var AnyOneApproval = new Schema({
         type:[ActionSchema],
         default:[]
     },
+    processedUser:{
+        type:[String],
+        default:[]
+    },
     workFlow:{
         type:String,
         default:""

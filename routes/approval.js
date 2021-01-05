@@ -8,8 +8,51 @@ var authenticate = require('../authenticate');
 router.use(bodyParser.json());
 const config=require('../config');
 
-// Create Different Levels
+// Get Different Level Information
 
+router.get('/Sequential/:level',authenticate.verifyUser,authenticate.verifyAdmin,(req,res,next) =>{
+    Approval.SequentialApproval.findOne({level:req.params.level})
+    .then((data) =>{
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(data);
+    })
+    .catch((err) =>{
+        res.statusCode=500;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({err:err});
+    });
+});
+
+router.get('/RoundRobin/:level',authenticate.verifyUser,authenticate.verifyAdmin,(req,res,next) =>{
+    Approval.RoundRobinApproval.findOne({level:req.params.level})
+    .then((data) =>{
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(data);
+    })
+    .catch((err) =>{
+        res.statusCode=500;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({err:err});
+    });
+});
+
+router.get('/AnyOne/:level',authenticate.verifyUser,authenticate.verifyAdmin,(req,res,next) =>{
+    Approval.AnyOneApproval.findOne({level:req.params.level})
+    .then((data) =>{
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(data);
+    })
+    .catch((err) =>{
+        res.statusCode=500;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({err:err});
+    });
+});
+
+// Create Different Levels
 router.post('/Sequential/:level',authenticate.verifyUser,authenticate.verifyAdmin,(req,res,next)=>{
     req.body.level=req.params.level;
     req.body.nextUser=req.body.users[0];
