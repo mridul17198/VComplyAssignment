@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 var usersRouter = require('./routes/users');
 var approvalRouter = require('./routes/approval');
 var actionRouter = require('./routes/actions');
+var resultRouter = require('./routes/result');
 
 var config = require('./config');
 
@@ -41,5 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', usersRouter);
 app.use('/approval',approvalRouter);
 app.use('/actions',actionRouter);
+app.use('/result',resultRouter);
 
 app.listen(3000);
